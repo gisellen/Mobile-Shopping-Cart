@@ -3,13 +3,28 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'recipes',
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'recipes',
+    //want to have a path recpies which loads recipes on page module
+    //and in the child page i can use the recipe id
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./recipes/recipes.module').then( m => m.RecipesPageModule)
+      },
+      {
+        path: ':recipeId',
+        loadChildren: () => import('./recipes/recipe-detail/recipe-detail.module').then( m => m.RecipeDetailPageModule)
+      },
+      {
+        path: ':checkout',
+        loadChildren: () => import('./recipes/checkout/checkout.module').then( m => m.CheckoutPageModule)
+       }
+    ]
   },
 ];
 

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let item of loadCart">
+    <ion-avatar slot="start">
+      <ion-img [src]="item.imageURL"></ion-img>
+    </ion-avatar>
+    <ion-label>{{item.title}}</ion-label>
+    <div slot="end">
+      Quantity: {{item.quantity}}<br>
+      Amount: ${{item.amount}}
+    </div>
+    <ion-button (click)="removeOne(item.id)">
+      <ion-icon name="remove" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button (click)="addMore(item.id)">
+      <ion-icon name="add" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <p class="checkout-desc">Total Amount: {{totalAmt}}</p>
+</ion-content>
